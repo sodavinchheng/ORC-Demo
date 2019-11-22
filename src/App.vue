@@ -3,8 +3,6 @@
     <NavBar />
 
     <v-content>
-      <router-link to="/" replace>Home</router-link> | 
-      <router-link to="/about" replace>About</router-link>
       <router-view></router-view>
     </v-content>
   </v-app>

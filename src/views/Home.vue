@@ -1,10 +1,6 @@
 <template>
   <div class="home">
-    <v-switch
-      v-model="$vuetify.theme.dark"
-      primary
-      label="Dark"
-    />
+    <h1>This is the home page</h1>
   </div>
 </template>
 
