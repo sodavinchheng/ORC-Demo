@@ -147,6 +147,13 @@
                     <span class="subtitle-1 font-weight-medium">About</span>
                 </v-list-item>
 
+                <v-list-item to="/login" replace>
+                    <v-list-item-icon>
+                        <v-icon>mdi-login</v-icon>
+                    </v-list-item-icon>
+                    <span class="subtitle-1 font-weight-medium">Login</span>
+                </v-list-item>
+
                 <v-subheader>Subjects</v-subheader>
 
                 <v-list-item v-for="subject in subjects" :key="subject.name" route :to="subject.route" replace>
