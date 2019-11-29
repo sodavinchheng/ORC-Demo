@@ -28,7 +28,7 @@
 
             <v-spacer></v-spacer>
             
-            <v-tooltip bottom close-delay="500">
+            <!-- <v-tooltip bottom close-delay="500">
                 <template v-slot:activator="{ on }">
                     <v-btn @click="$vuetify.theme.dark = !$vuetify.theme.dark" text v-on="on">
                         <v-icon :class="$vuetify.theme.dark ? 'd-none' : 'd-flex'">mdi-white-balance-sunny</v-icon>
@@ -37,7 +37,7 @@
                 </template>
                 <span :class="$vuetify.theme.dark ? 'd-flex' : 'd-none'">Enable Light Theme</span>
                 <span :class="$vuetify.theme.dark ? 'd-none' : 'd-flex'">Enable Dark Theme</span>
-            </v-tooltip>
+            </v-tooltip> -->
 
             <v-menu offset-y left transition="slide-y-transition">
                 <template v-slot:activator="{ on }">
@@ -109,14 +109,37 @@
                 <span>Notifications</span>
             </v-tooltip>
 
-            <v-tooltip bottom>
+            <!-- <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                     <v-btn text v-on="on">
                         <v-icon>mdi-exit-to-app</v-icon>
                     </v-btn>
                 </template>
                 <span>Sign Out</span>
-            </v-tooltip>
+            </v-tooltip> -->
+
+            <v-menu offset-y left transition="slide-y-transition">
+                <template v-slot:activator="{ on }">
+                    <v-btn text v-on="on">
+                        <v-icon>mdi-settings</v-icon>
+                    </v-btn>
+                </template>
+                <v-list>
+                    <v-list-item @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark">
+                        <v-icon :class="$vuetify.theme.dark ? 'd-flex' : 'd-none'">mdi-white-balance-sunny</v-icon>
+                        <v-icon :class="$vuetify.theme.dark ? 'd-none' : 'd-flex'">mdi-moon-waning-crescent</v-icon>
+                        <v-btn text :class="$vuetify.theme.dark ? 'd-flex' : 'd-none'">Enable Light Theme</v-btn>
+                        <v-btn text :class="$vuetify.theme.dark ? 'd-none' : 'd-flex'">Enable Dark Theme</v-btn>
+                    </v-list-item>
+
+                    <v-list-item @click.stop="signOut()">
+                        <v-icon>mdi-exit-to-app</v-icon>
+                        <v-btn text>Sign Out</v-btn>
+                    </v-list-item>
+                </v-list>
+            </v-menu>
+
+
         </v-app-bar>
 
         <v-navigation-drawer app clipped v-model="drawer" color="primary" dark width="350px" class="d-lg-flex">
@@ -128,12 +151,14 @@
                 </v-avatar>
             </v-row>
 
-            <v-row justify="space-around">
+            <v-row justify="space-around" class="my-3">
                 <span class="white--text headline my-2">Sodavin Chheng</span>
             </v-row>
 
+            <v-divider></v-divider>
+
             <v-list dense>
-                <v-list-item to="/" replace>
+                <v-list-item to="/home" replace>
                     <v-list-item-icon>
                         <v-icon>mdi-home</v-icon>
                     </v-list-item-icon>
@@ -170,6 +195,8 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
     name: 'NavBar',
     data() {
@@ -185,7 +212,13 @@ export default {
                 {name: 'Growth Hacking', icon: 'mdi-trending-up', route: '/gh'},
                 {name: 'Leadership & Communication', icon: 'mdi-voice', route: '/lc'},
                 {name: 'Web App Development', icon: 'mdi-web', route: '/wad'}
-            ]
+            ],
+            theme: ''
+        }
+    },
+    methods: {
+        signOut() {
+            firebase.auth().signOut().then(() => { this.$router.replace('login') });
         }
     }
 }
