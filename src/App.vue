@@ -1,13 +1,12 @@
 <template>
   <v-app>
-    <v-content :is="layout">
-      <router-view></router-view>
-    </v-content>
+    <component :is="layout">
+      <router-view :layout.sync='layout' />
+    </component>
   </v-app>
 </template>
 
 <script>
-const defaultLayout = 'default'
 
 export default {
   name: 'App',
@@ -17,13 +16,8 @@ export default {
   },
 
   data: () => ({
-    //
-  }),
-  computed: {
-     layout(){
-       return(this.$route.meta.layout || defaultLayout) + '-layout'
-     }
-  }
+    layout: 'div'
+  })
 };
 </script>
 

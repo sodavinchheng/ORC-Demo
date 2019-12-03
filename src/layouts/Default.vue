@@ -2,9 +2,9 @@
     <v-app>
         <NavBar />
         
-        <main class="main">
-            <slot />
-        </main>
+            <v-content class="ml-5">
+                <slot />
+            </v-content>
     </v-app>
 </template>
 

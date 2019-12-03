@@ -25,13 +25,23 @@
                                             :type="showPassword ? 'text' : 'password'" 
                                             @click:append="showPassword = !showPassword" />
                         </v-form>
+                        <p class="red--text" v-if="hasError">**Email or Password Is Incorrect</p>
                     </v-card-text>
 
                     <v-divider></v-divider>
 
-                    <v-row justify="space-around" class="my-2">
-                        <v-btn color="info" class="my-3" @click="login()">Login</v-btn>
+                    <v-row justify="space-around">
+                        <v-btn color="info" class="my-2" @click="login()">Login</v-btn>
                     </v-row>
+
+                    <v-row justify="space-around">
+                        <p class="my-2">--or--</p>
+                    </v-row>
+
+                    <v-row justify="space-around">
+                        <v-btn color="info" class="my-2">Sign In With Google</v-btn>
+                    </v-row>
+                    
                 </v-tab-item>
 
                 <v-tab-item>
@@ -70,15 +80,22 @@ export default {
             email: '',
             password: '',
             signUpEmail: '',
-            signUpPassword: ''
+            signUpPassword: '',
+            hasError: false
         }
     },
     methods: {
         login(){
             firebase.auth().signInWithEmailAndPassword(this.email, this.password)
             .then(
-                () => { this.$router.replace('home') },
-                (err) => { console.log("Oops, Something Went Wrong...\n" + err.message) }
+                () => {
+                    this.$router.replace('home')
+                    location.reload()
+                    },
+                (err) => {
+                    this.hasError = true
+                    console.log("Oops, Something Went Wrong...\n" + err.message)
+                    }
             );
         },
         signUp(){

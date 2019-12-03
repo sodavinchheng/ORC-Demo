@@ -18,11 +18,9 @@
                 width="75"
                 />
 
-                <!-- <h1 class="hidden-sm-and-down">Online Remote Classroom</h1> -->
+                <h1 class="hidden-sm-and-down mx-5">Online Remote Classroom</h1>
 
-                <v-toolbar-title class="hidden-sm-and-down">
-                    <span class="title">Online Remote Classroom</span>
-                </v-toolbar-title>
+                 
 
             </div>
 
@@ -146,13 +144,16 @@
 
             <v-row justify="space-around">
                 <v-avatar color="teal" size="150" class="mt-10">
-                    <!-- <span class="white--text display-2">SC</span> -->
                     <v-icon size="150">mdi-account</v-icon>
                 </v-avatar>
             </v-row>
 
             <v-row justify="space-around" class="my-3">
-                <span class="white--text headline my-2">Sodavin Chheng</span>
+                <span class="white--text headline mt-2">Sodavin Chheng</span>
+            </v-row>
+
+            <v-row justify="space-around" class="my-3">
+                <span class="white--text body-2">chhengsodavin18@kit.edu.kh</span>
             </v-row>
 
             <v-divider></v-divider>
@@ -172,12 +173,12 @@
                     <span class="subtitle-1 font-weight-medium">About</span>
                 </v-list-item>
 
-                <v-list-item to="/login" replace>
+                <!-- <v-list-item to="/login" replace>
                     <v-list-item-icon>
                         <v-icon>mdi-login</v-icon>
                     </v-list-item-icon>
                     <span class="subtitle-1 font-weight-medium">Login</span>
-                </v-list-item>
+                </v-list-item> -->
 
                 <v-subheader>Subjects</v-subheader>
 
