@@ -26,6 +26,9 @@
                                             @click:append="showPassword = !showPassword" />
                         </v-form>
                         <p class="red--text" v-if="hasError">**Email or Password Is Incorrect</p>
+                        <v-row justify="space-around" v-if="isLoading">
+                            <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                        </v-row>
                     </v-card-text>
 
                     <v-divider></v-divider>
@@ -39,7 +42,7 @@
                     </v-row>
 
                     <v-row justify="space-around">
-                        <v-btn color="info" class="my-2">Sign In With Google</v-btn>
+                        <v-btn color="info" class="my-2" @click="googleSignIn()">Sign In With Google</v-btn>
                     </v-row>
                     
                 </v-tab-item>
@@ -81,18 +84,22 @@ export default {
             password: '',
             signUpEmail: '',
             signUpPassword: '',
-            hasError: false
+            hasError: false,
+            isLoading: false
         }
     },
     methods: {
         login(){
+            this.isLoading = true
             firebase.auth().signInWithEmailAndPassword(this.email, this.password)
             .then(
                 () => {
+                    this.isLoading = false
                     this.$router.replace('home')
                     location.reload()
                     },
                 (err) => {
+                    this.isLoading = false
                     this.hasError = true
                     console.log("Oops, Something Went Wrong...\n" + err.message)
                     }
@@ -104,6 +111,32 @@ export default {
                 () => { this.$router.replace('home') },
                 (err) => { console.log("Oops, Something Went Wrong...\n" + err.message) }
             );
+        },
+        googleSignIn() {
+            var provider = new firebase.auth.GoogleAuthProvider();
+            this.isLoading = true
+            firebase.auth().signInWithPopup(provider).then(
+                (result) => {
+                    console.log(result)
+                    this.isLoading = false
+                    this.$router.replace('home')
+                    location.reload()
+            }).catch(
+                (error) => {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    // ...
+                    console.log(errorCode)
+                    console.log(errorMessage)
+                    console.log(email)
+                    console.log(credential)
+                    this.isLoading = false
+            });
         }
     }
 }

@@ -144,16 +144,16 @@
 
             <v-row justify="space-around">
                 <v-avatar color="teal" size="150" class="mt-10">
-                    <v-icon size="150">mdi-account</v-icon>
+                    <img :src="userPhotoId" alt="Profile Pic">
                 </v-avatar>
             </v-row>
 
             <v-row justify="space-around" class="my-3">
-                <span class="white--text headline mt-2">Sodavin Chheng</span>
+                <span class="white--text headline mt-2">{{userName}}</span>
             </v-row>
 
             <v-row justify="space-around" class="my-3">
-                <span class="white--text body-2">chhengsodavin18@kit.edu.kh</span>
+                <span class="white--text body-2">{{userEmail}}</span>
             </v-row>
 
             <v-divider></v-divider>
@@ -214,13 +214,22 @@ export default {
                 {name: 'Leadership & Communication', icon: 'mdi-voice', route: '/lc'},
                 {name: 'Web App Development', icon: 'mdi-web', route: '/wad'}
             ],
-            theme: ''
+            userName: '',
+            userEmail: '',
+            userPhotoId: '',
         }
     },
     methods: {
         signOut() {
             firebase.auth().signOut().then(() => { this.$router.replace('login') });
         }
+    },
+    created() {
+        firebase.auth().onAuthStateChanged(user => {
+            this.userName = user.displayName
+            this.userEmail = user.email
+            this.userPhotoId = user.photoURL
+        })
     }
 }
 </script>
