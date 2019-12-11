@@ -1,29 +1,26 @@
 <template>
   <v-app>
     <component :is="layout">
-      <router-view :layout.sync='layout' />
+      <router-view :layout.sync="layout" />
     </component>
   </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: "App",
 
-  components: {
-    
-  },
+  components: {},
 
   data: () => ({
-    layout: 'div'
+    layout: "div"
   })
 };
 </script>
 
 <style>
-  *{
-    margin: 0px;
-    padding: 0px;
-  }
+* {
+  margin: 0px;
+  padding: 0px;
+}
 </style>

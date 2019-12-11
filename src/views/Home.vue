@@ -6,15 +6,13 @@
 
 <script>
 // @ is an alias to /src
-import DefaultLayout from '../layouts/Default'
+import DefaultLayout from "../layouts/Default";
 
 export default {
-  name: 'home',
-  components: {
-    
-  },
+  name: "home",
+  components: {},
   created() {
-    this.$emit('update:layout', DefaultLayout)
+    this.$emit("update:layout", DefaultLayout);
   }
-}
+};
 </script>
